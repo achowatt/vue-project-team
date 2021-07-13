@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>Lucky Brand<span class="project">PROJECT</span></h1>
+    <h1>
+      Lucky Brand<span class="project">{{ project.title }}</span>
+    </h1>
     <div class="description-wrapper">
       <p class="description-text">Description</p>
       <p class="project-description">
-        Our team is composed of experts in the fields of strategy, design, and
-        technology. We design strong concepts and bring them to life through
-        confident digital craftsmanship.
+        {{ project.description }}
       </p>
     </div>
 
@@ -29,6 +29,12 @@ export default {
   components: {},
   data() {
     return {
+      project: {
+        id: "111",
+        title: "Lucky Brand",
+        description:
+          "Our team is composed of experts in the fields of strategy, design, and technology. We design strong concepts and bring them to life through confident digital craftsmanship.",
+      },
       teamMembers: [
         {
           id: "123",

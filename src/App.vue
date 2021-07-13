@@ -1,9 +1,9 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/project">Project</router-link>
-  </div> -->
-  <img class="logo" src="./assets/logo.svg" alt="" width="66" height="26" />
+  <div id="nav">
+    <router-link to="/">
+      <img class="logo" src="./assets/logo.svg" alt="" width="66" height="26" />
+    </router-link>
+  </div>
   <div class="container">
     <router-view />
   </div>
@@ -16,19 +16,11 @@
   -moz-osx-font-smoothing: grayscale;
   color: black;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+button {
+  background: transparent;
+  border: none;
 }
+
 .logo {
   position: fixed;
   top: 3rem;
@@ -54,5 +46,6 @@ h2 {
 
 p {
   font-family: "Raleway", sans-serif;
+  margin: 0.5rem 0;
 }
 </style>
