@@ -17,8 +17,12 @@
   color: black;
 }
 button {
-  background: transparent;
+  font-family: "Raleway", sans-serif;
   border: none;
+  font-size: 1rem;
+  background: #c9e3fc;
+  line-height: 2;
+  cursor: pointer;
 }
 
 .logo {
