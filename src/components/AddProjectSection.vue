@@ -8,7 +8,7 @@
           type="text"
           name="project-title"
           id="project-title"
-          v-model="form.title"
+          v-model="title"
           placeholder="enter project title here"
           required
         />
@@ -19,7 +19,7 @@
           type="text"
           name="project-description"
           id="project-description"
-          v-model="form.description"
+          v-model="description"
           placeholder="tell us about your awesome project"
           required
         />
@@ -27,12 +27,18 @@
       <div id="step-3" class="form-group">
         <label for="">Step 3: Choose your team members</label>
         <div class="team-images">
-          <div v-for="{ id, imageUrl, fullName, jobTitle } in users" :key="id">
+          <div
+            v-for="({ id, imageUrl, fullName, jobTitle }, index) in users"
+            :key="id"
+          >
             <UserList
               :id="id"
               :imageUrl="imageUrl"
               :fullName="fullName"
               :jobTitle="jobTitle"
+              :index="index"
+              @add="add"
+              @remove="remove"
             />
           </div>
         </div>
@@ -45,19 +51,16 @@
         <div class="confirm-project">
           <div class="group">
             <p class="confirm-title">Project:</p>
-            <p>{{ form.title }}</p>
+            <p>{{ title }}</p>
           </div>
           <div class="group">
             <p class="confirm-title">Description:</p>
-            <p>{{ form.description }}</p>
+            <p>{{ description }}</p>
           </div>
           <p class="confirm-title">Team Members:</p>
         </div>
         <ul class="confirm-members">
-          <li
-            v-for="{ fullName, jobTitle, id } in form.chosenMembers"
-            :key="id"
-          >
+          <li v-for="{ fullName, jobTitle, id } in chosenMembers" :key="id">
             <span>{{ fullName }}</span
             >{{ jobTitle }}
           </li>
@@ -70,39 +73,38 @@
 
 <script>
 import UserList from "./UserList.vue";
-import { reactive } from "vue";
-import { useRouter } from "vue-router";
-import { useTeamMembers, clearTeam } from "@/addteam.js";
-import { createProject, useLoadUsers } from "@/firebase.js";
+import { createProject, fetchUsers } from "@/firebase.js";
 export default {
   components: { UserList },
-  setup() {
-    const users = useLoadUsers();
-    const router = useRouter();
-    const form = reactive({
+  data() {
+    return {
       title: "",
       description: "",
-      chosenMembers: useTeamMembers(),
-    });
-
-    console.log(form.chosenMembers);
-
-    function onSubmit() {
+      chosenMembers: [],
+      users: [],
+    };
+  },
+  methods: {
+    onSubmit() {
       const saveInfo = {
-        title: form.title,
-        description: form.description,
-        teamMembers: form.chosenMembers,
+        title: this.title,
+        description: this.description,
+        teamMembers: this.chosenMembers,
       };
       createProject(saveInfo).then((docRef) => {
-        form.title = "";
-        form.description = "";
-        form.chosenMembers = "";
-        clearTeam();
-        router.push({ path: `/project/${docRef.id}` });
+        this.$router.push({ path: `/project/${docRef.id}` });
       });
-    }
-
-    return { form, onSubmit, users };
+    },
+    add(id) {
+      const user = this.users.filter((user) => user.id == id)[0];
+      this.chosenMembers.push(user);
+    },
+    remove(id) {
+      this.chosenMembers = this.chosenMembers.filter((user) => user.id !== id);
+    },
+  },
+  created() {
+    fetchUsers().then((users) => (this.users = users));
   },
 };
 </script>

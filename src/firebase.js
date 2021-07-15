@@ -44,6 +44,11 @@ export const useLoadUsers = () => {
   return users;
 };
 
+export const fetchUsers = async () => {
+  const users = await usersCollection.get();
+  return users.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+};
+
 //Create / Get / Update / Delete Project
 const projectsCollection = db.collection("projects");
 export const createProject = (project) => {

@@ -9,47 +9,36 @@
     <button
       v-if="chosen"
       class="delete-team"
-      @click="deleteMember(id)"
+      @click="deleteMember()"
       type="button"
     >
       Remove
     </button>
-    <button v-else class="add-team" @click="addMember(id)" type="button">
+    <button v-else class="add-team" @click="addMember()" type="button">
       Add to Team
     </button>
   </div>
 </template>
 
 <script>
-import { useLoadUsers } from "@/firebase";
-import { addTeamMember, useTeamMembers, deleteTeamMember } from "@/addteam";
-import { ref } from "vue";
 export default {
   name: "UserList",
-  props: ["fullName", "jobTitle", "id", "imageUrl"],
-  setup() {
-    const users = useLoadUsers();
-    const chosen = ref(false);
-    const existingTeam = useTeamMembers();
-
-    function addMember(id) {
-      if (existingTeam.filter((user) => user.id === id).length > 0) {
-        console.log("Already exists");
-      } else {
-        const user = users.value.filter((user) => user.id === id);
-        addTeamMember(...user);
-        console.log(existingTeam);
-        chosen.value = true;
-      }
-    }
-
-    function deleteMember(id) {
-      deleteTeamMember(id);
-      console.log(existingTeam);
-      chosen.value = false;
-    }
-
-    return { users, addMember, deleteMember, chosen };
+  props: ["fullName", "jobTitle", "id", "imageUrl", "index"],
+  emits: ["add", "remove"],
+  data() {
+    return {
+      chosen: false,
+    };
+  },
+  methods: {
+    addMember() {
+      this.$emit("add", this.id);
+      this.chosen = true;
+    },
+    deleteMember() {
+      this.$emit("remove", this.id);
+      this.chosen = false;
+    },
   },
 };
 </script>
