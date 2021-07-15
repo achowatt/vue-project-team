@@ -7,16 +7,25 @@
         {{ project.description }}
       </p>
     </div>
+    <div class="description-wrapper">
+      <p class="description-text">Team</p>
+      <p class="project-description">
+        {{ project.description }}
+      </p>
+    </div>
 
-    <h2>Meet the Team</h2>
+    <h2>Meet the team</h2>
 
-    <div class="team-images">
-      <div
-        v-for="member in project.teamMembers"
-        :key="member.id"
-        :id="member.id"
-      >
-        <img :src="member.imageUrl" :alt="member.name" />
+    <div
+      v-for="member in project.teamMembers"
+      :key="member.id"
+      :id="member.id"
+      class="member-section"
+    >
+      <div>
+        <img :src="member.imageUrl" :alt="member.name" class="member-image" />
+      </div>
+      <div class="member-info">
         <h3 class="name">{{ member.fullName }}</h3>
         <p class="job-title">{{ member.jobTitle }}</p>
         <p class="bio">{{ member.bio }}</p>
@@ -61,6 +70,64 @@ export default {
   }
 }
 
+.description-wrapper {
+  display: flex;
+  margin-bottom: 0rem;
+
+  .description-text {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 17rem;
+    flex: 1;
+  }
+
+  .project-description {
+    position: relative;
+    top: -8px;
+    flex: 5;
+  }
+}
+
+p {
+  line-height: 1.7;
+}
+
+h2 {
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+}
+
+.member-section {
+  display: flex;
+  margin-bottom: 5rem;
+  align-items: center;
+
+  &:nth-of-type(even) {
+    div:nth-of-type(odd) {
+      order: 2;
+      padding-left: 5rem;
+    }
+    div:nth-of-type(even) {
+      order: 1;
+    }
+  }
+
+  &:nth-of-type(odd) {
+    div:nth-of-type(odd) {
+      padding-right: 5rem;
+    }
+  }
+
+  .member-image {
+    width: auto;
+    max-height: 400px;
+  }
+  .job-title {
+    font-weight: bold;
+  }
+}
+
 .span {
   color: #ede6de;
   display: block;
@@ -71,38 +138,7 @@ export default {
   grid-gap: 1rem;
 }
 
-.swipe-button {
-  position: absolute;
-  border: none;
-  width: 100px;
-  height: 100px;
-  background: white;
-  border-radius: 50%;
-  top: calc(50% - 100px);
-}
-
-.swipe-next {
-  left: calc(389px * 3 - 10px);
-}
-
 .swipe-prev {
   left: -50px;
-}
-
-.description-wrapper {
-  display: flex;
-  margin-bottom: 7rem;
-
-  .description-text {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    width: 17rem;
-  }
-
-  .project-description {
-    position: relative;
-    top: -8px;
-  }
 }
 </style>

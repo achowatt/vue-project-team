@@ -1,6 +1,6 @@
 <template>
   <section class="create-project-section">
-    <h1>Build Your Dream team <span class="span">in 3 simple steps</span></h1>
+    <h1>Build Your team <span class="span">in 3 simple steps</span></h1>
     <form @submit.prevent="onSubmit">
       <div id="step-1" class="form-group">
         <label for="project-title">Step 1: Project Name</label>
@@ -10,6 +10,7 @@
           id="project-title"
           v-model="form.title"
           placeholder="enter project title here"
+          required
         />
       </div>
       <div id="step-2" class="form-group">
@@ -19,7 +20,8 @@
           name="project-description"
           id="project-description"
           v-model="form.description"
-          placeholder="tell us about this awesome project"
+          placeholder="tell us about your awesome project"
+          required
         />
       </div>
       <div id="step-3" class="form-group">
@@ -41,7 +43,7 @@
         </h1>
         <div class="confirm-description">
           <div class="flex-container">
-            <h2>Project</h2>
+            <p><span>Project:</span> {{ form.title }}</p>
             <p>{{ form.title }}</p>
           </div>
           <p><span>Description:</span> {{ form.description }}</p>
@@ -65,6 +67,7 @@
 <script>
 import UserList from "./UserList.vue";
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 import { useTeamMembers } from "@/addteam.js";
 import { createProject, useLoadUsers } from "@/firebase.js";
 export default {
@@ -72,6 +75,7 @@ export default {
   setup() {
     const team = useTeamMembers();
     const users = useLoadUsers();
+    const router = useRouter();
     const form = reactive({
       title: "",
       description: "",
@@ -84,8 +88,9 @@ export default {
         description: form.description,
         teamMembers: form.chosenMembers,
       };
-      console.log("YAY Submitted!!");
-      createProject(saveInfo);
+      createProject(saveInfo).then((docRef) => {
+        router.push({ path: `/project/${docRef.id}` });
+      });
     }
 
     return { form, onSubmit, users };
@@ -167,6 +172,5 @@ input {
 
 .flex-container {
   display: flex;
-  justify-content: center;
 }
 </style>
