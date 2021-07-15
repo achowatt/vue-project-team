@@ -13,4 +13,8 @@ const deleteTeamMember = (id) => {
   );
 };
 
-export { addTeamMember, useTeamMembers, deleteTeamMember };
+const clearTeam = () => {
+  state.value.members = [];
+};
+
+export { addTeamMember, useTeamMembers, deleteTeamMember, clearTeam };

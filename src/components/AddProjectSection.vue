@@ -1,6 +1,6 @@
 <template>
   <section class="create-project-section">
-    <h1>Build Your team <span class="span">in 3 simple steps</span></h1>
+    <h1>Build Your team <span class="highlight-1">in 3 simple steps</span></h1>
     <form @submit.prevent="onSubmit">
       <div id="step-1" class="form-group">
         <label for="project-title">Step 1: Project Name</label>
@@ -39,15 +39,19 @@
       </div>
       <div id="step-4" class="confirm">
         <h1>
-          Confirm and create <span class="span"> your amazing team!</span>
+          Confirm and create
+          <span class="highlight-2"> your amazing team!</span>
         </h1>
-        <div class="confirm-description">
-          <div class="flex-container">
-            <p><span>Project:</span> {{ form.title }}</p>
+        <div class="confirm-project">
+          <div class="group">
+            <p class="confirm-title">Project:</p>
             <p>{{ form.title }}</p>
           </div>
-          <p><span>Description:</span> {{ form.description }}</p>
-          <p><span>Team Members:</span></p>
+          <div class="group">
+            <p class="confirm-title">Description:</p>
+            <p>{{ form.description }}</p>
+          </div>
+          <p class="confirm-title">Team Members:</p>
         </div>
         <ul class="confirm-members">
           <li
@@ -68,19 +72,20 @@
 import UserList from "./UserList.vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import { useTeamMembers } from "@/addteam.js";
+import { useTeamMembers, clearTeam } from "@/addteam.js";
 import { createProject, useLoadUsers } from "@/firebase.js";
 export default {
   components: { UserList },
   setup() {
-    const team = useTeamMembers();
     const users = useLoadUsers();
     const router = useRouter();
     const form = reactive({
       title: "",
       description: "",
-      chosenMembers: team,
+      chosenMembers: useTeamMembers(),
     });
+
+    console.log(form.chosenMembers);
 
     function onSubmit() {
       const saveInfo = {
@@ -89,6 +94,10 @@ export default {
         teamMembers: form.chosenMembers,
       };
       createProject(saveInfo).then((docRef) => {
+        form.title = "";
+        form.description = "";
+        form.chosenMembers = "";
+        clearTeam();
         router.push({ path: `/project/${docRef.id}` });
       });
     }
@@ -99,9 +108,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.span {
-  color: #c9e3fc;
+span {
   display: block;
+}
+.highlight-1 {
+  color: #c9e3fc;
+}
+
+.highlight-2 {
+  color: #ede6de;
 }
 
 label {
@@ -152,6 +167,20 @@ input {
   max-width: 700px;
 }
 
+.confirm-project {
+  p {
+    font-weight: bold;
+    line-height: 2;
+  }
+  .confirm-title {
+    color: grey;
+    border-bottom: solid 1px rgb(228, 228, 228);
+  }
+  .group {
+    margin-bottom: 2rem;
+  }
+}
+
 .confirm-members {
   max-width: 800px;
   columns: 2;
@@ -163,14 +192,30 @@ input {
   li {
     margin-right: 2rem;
     margin-bottom: 1rem;
+    text-transform: lowercase;
   }
   span {
     font-weight: bold;
     display: block;
+    text-transform: uppercase;
   }
 }
 
 .flex-container {
   display: flex;
+}
+
+button[type="submit"] {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1rem;
+  background: #80c2ff;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  &:hover {
+    background: rgb(0, 68, 255);
+  }
 }
 </style>

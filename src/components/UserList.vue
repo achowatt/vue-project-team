@@ -4,7 +4,7 @@
   <p class="job-title">{{ jobTitle }}</p>
   <div class="button-container">
     <router-link :to="`/bio/${id}`">
-      <button type="button" class="read-bio">Read Bio</button>
+      <button type="button" class="read-bio">Bio & Details</button>
     </router-link>
     <button
       v-if="chosen"
@@ -30,20 +30,22 @@ export default {
   setup() {
     const users = useLoadUsers();
     const chosen = ref(false);
+    const existingTeam = useTeamMembers();
 
     function addMember(id) {
-      const existingTeam = useTeamMembers();
       if (existingTeam.filter((user) => user.id === id).length > 0) {
         console.log("Already exists");
       } else {
         const user = users.value.filter((user) => user.id === id);
         addTeamMember(...user);
+        console.log(existingTeam);
         chosen.value = true;
       }
     }
 
     function deleteMember(id) {
       deleteTeamMember(id);
+      console.log(existingTeam);
       chosen.value = false;
     }
 

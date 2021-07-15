@@ -7,12 +7,6 @@
         {{ project.description }}
       </p>
     </div>
-    <div class="description-wrapper">
-      <p class="description-text">Team</p>
-      <p class="project-description">
-        {{ project.description }}
-      </p>
-    </div>
 
     <h2>Meet the team</h2>
 
@@ -71,11 +65,10 @@ export default {
 }
 
 .description-wrapper {
-  display: flex;
   margin-bottom: 0rem;
 
   .description-text {
-    font-size: 0.7rem;
+    font-size: 1rem;
     text-transform: uppercase;
     font-weight: bold;
     width: 17rem;
@@ -84,8 +77,10 @@ export default {
 
   .project-description {
     position: relative;
-    top: -8px;
+    top: -2px;
     flex: 5;
+  }
+  @media screen and (max-width) {
   }
 }
 
@@ -103,7 +98,7 @@ h2 {
   margin-bottom: 5rem;
   align-items: center;
 
-  &:nth-of-type(even) {
+  &:nth-of-type(odd) {
     div:nth-of-type(odd) {
       order: 2;
       padding-left: 5rem;
@@ -113,7 +108,7 @@ h2 {
     }
   }
 
-  &:nth-of-type(odd) {
+  &:nth-of-type(even) {
     div:nth-of-type(odd) {
       padding-right: 5rem;
     }
@@ -125,6 +120,38 @@ h2 {
   }
   .job-title {
     font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .member-section {
+    display: flex;
+    flex-direction: column;
+    align-items: unset;
+    &:nth-of-type(odd) {
+      div:nth-of-type(odd) {
+        order: unset;
+        padding-left: 0;
+      }
+      div:nth-of-type(even) {
+        order: unset;
+      }
+    }
+
+    &:nth-of-type(even) {
+      div:nth-of-type(odd) {
+        padding-right: 0;
+      }
+    }
+
+    .member-image {
+      max-width: 100%;
+      max-height: none;
+      margin-bottom: 2rem;
+    }
+    .job-title {
+      font-weight: bold;
+    }
   }
 }
 
