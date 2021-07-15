@@ -3,7 +3,9 @@
   <p class="name">{{ fullName }}</p>
   <p class="job-title">{{ jobTitle }}</p>
   <div class="button-container">
-    <button class="read-bio" type="button">Read Bio</button>
+    <router-link :to="`/bio/${id}`">
+      <button type="button" class="read-bio">Read Bio</button>
+    </router-link>
     <button
       v-if="chosen"
       class="delete-team"
@@ -57,8 +59,8 @@ img {
 }
 button {
   width: 50%;
-  background: #c9e3fc;
-  border: solid 2px #c9e3fc;
+  background: #eeeeee;
+  border: solid 2px #eeeeee;
 }
 
 .name {
@@ -67,6 +69,6 @@ button {
 
 .read-bio {
   background: white;
-  border: solid 2px #c9e3fc;
+  border: solid 2px #eeeeee;
 }
 </style>

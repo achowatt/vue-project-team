@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main class="container">
     <h1>{{ project.title }}<span class="span">Project</span></h1>
     <div class="description-wrapper">
       <p class="description-text">Description</p>
@@ -22,7 +22,7 @@
         <p class="bio">{{ member.bio }}</p>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -51,6 +51,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  max-width: 1200px;
+  margin: 9rem auto 0 auto;
+  padding: 0 64px 64px;
+
+  @media screen and (max-width: 700px) {
+    padding: 1rem;
+  }
+}
+
 .span {
   color: #ede6de;
   display: block;

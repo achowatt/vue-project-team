@@ -1,5 +1,7 @@
 <template>
-  <AddProjectSection />
+  <main class="container">
+    <AddProjectSection />
+  </main>
   <!-- <SigniflyEmployeeSection /> -->
 </template>
 
@@ -23,5 +25,15 @@ export default {
 img {
   width: 100%;
   height: auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 9rem auto 0 auto;
+  padding: 0 64px 64px;
+
+  @media screen and (max-width: 700px) {
+    padding: 1rem;
+  }
 }
 </style>

@@ -4,9 +4,7 @@
       <img class="logo" src="./assets/logo.svg" alt="" width="66" height="26" />
     </router-link>
   </nav>
-  <div class="container">
-    <router-view />
-  </div>
+  <router-view />
   <footer></footer>
 </template>
 
@@ -44,16 +42,6 @@ button {
   position: fixed;
   top: 3rem;
   right: 2.5rem;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 9rem auto 0 auto;
-  padding: 0 64px 64px;
-
-  @media screen and (max-width: 700px) {
-    padding: 1rem;
-  }
 }
 
 h1 {
