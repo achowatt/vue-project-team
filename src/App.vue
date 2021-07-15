@@ -1,17 +1,33 @@
 <template>
-  <div id="nav">
+  <nav id="nav">
     <router-link to="/">
       <img class="logo" src="./assets/logo.svg" alt="" width="66" height="26" />
     </router-link>
-  </div>
+  </nav>
   <div class="container">
     <router-view />
   </div>
+  <footer></footer>
 </template>
 
 <style lang="scss">
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  @media screen and (max-width: 740px) {
+    font-size: 85%;
+  }
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Raleway", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: black;
@@ -20,7 +36,6 @@ button {
   font-family: "Raleway", sans-serif;
   border: none;
   font-size: 1rem;
-  background: #c9e3fc;
   line-height: 2;
   cursor: pointer;
 }
@@ -30,16 +45,22 @@ button {
   top: 3rem;
   right: 2.5rem;
 }
+
 .container {
   max-width: 1200px;
   margin: 9rem auto 0 auto;
-  padding: 0 64px;
+  padding: 0 64px 64px;
+
+  @media screen and (max-width: 700px) {
+    padding: 1rem;
+  }
 }
 
 h1 {
   font-size: 5rem;
   line-height: 0.9;
   margin-bottom: 3rem;
+  color: black;
 }
 
 h1,
@@ -49,7 +70,13 @@ h2 {
 }
 
 p {
-  font-family: "Raleway", sans-serif;
   margin: 0.5rem 0;
+}
+
+p,
+button {
+  @media screen and (max-width: 740px) {
+    font-size: 1.2rem;
+  }
 }
 </style>

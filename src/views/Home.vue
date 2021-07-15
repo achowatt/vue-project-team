@@ -1,20 +1,21 @@
 <template>
-  <router-link to="/project">Project</router-link>
-  <section class="project-list-section">
-    <h1>Projects</h1>
-  </section>
-
-  <SigniflyEmployeeSection />
+  <AddProjectSection />
+  <!-- <SigniflyEmployeeSection /> -->
 </template>
 
 <script>
 // @ is an alias to /src
-import SigniflyEmployeeSection from "@/components/SigniflyEmployeeSection.vue";
+// import SigniflyEmployeeSection from "@/components/SigniflyEmployeeSection.vue";
+import AddProjectSection from "@/components/AddProjectSection.vue";
+// import ProjectList from "@/components/ProjectList.vue";
 
 export default {
   name: "Home",
   components: {
-    SigniflyEmployeeSection,
+    // SigniflyEmployeeSection,
+    AddProjectSection,
+
+    // ProjectList,
   },
 };
 </script>

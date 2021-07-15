@@ -1,5 +1,5 @@
 <template>
-  <div v-for="{ title, teamMembers, id } in projects" :key="id">
+  <div v-for="{ title, id, teamMembers } in projects" :key="id">
     <p>{{ title }}</p>
     <p v-for="{ fullName, id } in teamMembers" :key="id" class="name">
       {{ fullName }}
@@ -10,9 +10,9 @@
 <script>
 import { useLoadProjects, deleteProjects } from "@/firebase";
 export default {
-  name: "ProjectList",
   setup() {
     const projects = useLoadProjects();
+    console.log(projects);
     return { projects, deleteProjects };
   },
 };

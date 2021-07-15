@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1>
-      Lucky Brand<span class="project">{{ project.title }}</span>
-    </h1>
+    <h1>{{ project.title }}<span class="span">Project</span></h1>
     <div class="description-wrapper">
       <p class="description-text">Description</p>
       <p class="project-description">
@@ -13,7 +11,11 @@
     <h2>Meet the Team</h2>
 
     <div class="team-images">
-      <div v-for="member in teamMembers" :key="member.id" :id="member.id">
+      <div
+        v-for="member in project.teamMembers"
+        :key="member.id"
+        :id="member.id"
+      >
         <img :src="member.imageUrl" :alt="member.name" />
         <h3 class="name">{{ member.fullName }}</h3>
         <p class="job-title">{{ member.jobTitle }}</p>
@@ -24,61 +26,32 @@
 </template>
 
 <script>
+import { computed, onMounted, reactive } from "vue";
+import { useRoute } from "vue-router";
+import { getProject } from "@/firebase";
+
 export default {
   name: "Project",
   components: {},
-  data() {
-    return {
-      project: {
-        id: "111",
-        title: "Lucky Brand",
-        description:
-          "Our team is composed of experts in the fields of strategy, design, and technology. We design strong concepts and bring them to life through confident digital craftsmanship.",
-      },
-      teamMembers: [
-        {
-          id: "123",
-          imageUrl:
-            "https://www.datocms-assets.com/7718/1562334980-ntk2870-edit.jpg?auto=compress&w=389&dpr=1&q=70",
-          fullName: "Hello World",
-          jobTitle: "Carpenter",
-          bio: "something",
-        },
-        {
-          id: "456",
-          imageUrl:
-            "https://www.datocms-assets.com/7718/1562334980-ntk2870-edit.jpg?auto=compress&w=389&dpr=1&q=70",
-          fullName: "Hello World",
-          jobTitle: "Carpenter",
-          bio: "something",
-        },
-        {
-          id: "456",
-          imageUrl:
-            "https://www.datocms-assets.com/7718/1562334980-ntk2870-edit.jpg?auto=compress&w=389&dpr=1&q=70",
-          fullName: "Hello World",
-          jobTitle: "Carpenter",
-          bio: "something",
-        },
-        {
-          id: "456",
-          imageUrl:
-            "https://www.datocms-assets.com/7718/1562334980-ntk2870-edit.jpg?auto=compress&w=389&dpr=1&q=70",
-          fullName: "Hello World",
-          jobTitle: "Carpenter",
-          bio: "something",
-        },
-      ],
-    };
+  setup() {
+    const route = useRoute();
+    const projectId = computed(() => route.params.id);
+    const project = reactive({ description: "", teamMembers: "", title: "" });
+
+    onMounted(async () => {
+      const data = await getProject(projectId.value);
+      console.log(data);
+      project.description = data.description;
+      project.teamMembers = data.teamMembers;
+      project.title = data.title;
+    });
+    return { project };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: black;
-}
-.project {
+.span {
   color: #ede6de;
   display: block;
 }

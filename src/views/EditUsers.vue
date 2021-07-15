@@ -28,7 +28,7 @@ import { reactive, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getUser, updateUser } from "@/firebase";
 export default {
-  name: "EditEmployee",
+  name: "EditUsers",
   setup() {
     const router = useRouter();
     const route = useRoute();

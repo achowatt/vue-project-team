@@ -50,20 +50,20 @@ export const createProject = (project) => {
   return projectsCollection.add(project);
 };
 
-export const getproject = async (id) => {
+export const getProject = async (id) => {
   const project = await projectsCollection.doc(id).get();
   return project.exists ? project.data() : null;
 };
 
-export const updateproject = (id, project) => {
+export const updateProject = (id, project) => {
   return projectsCollection.doc(id).update(project);
 };
 
-export const deleteproject = (id) => {
+export const deleteProject = (id) => {
   return projectsCollection.doc(id).delete();
 };
 
-export const useLoadprojects = () => {
+export const useLoadProjects = () => {
   const projects = ref([]);
   const close = projectsCollection.onSnapshot((snapshot) => {
     projects.value = snapshot.docs.map((doc) => ({
