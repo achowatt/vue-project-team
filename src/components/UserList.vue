@@ -114,5 +114,9 @@ img {
   background: white;
   font-style: italic;
   line-height: 0.7;
+  &:hover {
+    text-decoration: underline;
+    font-weight: bold;
+  }
 }
 </style>

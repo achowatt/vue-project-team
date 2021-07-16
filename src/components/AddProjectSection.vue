@@ -176,7 +176,7 @@ span {
 
 .team-images {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 1rem;
   grid-row-gap: 1.5rem;
 }
@@ -232,6 +232,7 @@ button[type="submit"] {
   color: white;
   text-transform: uppercase;
   font-weight: bold;
+  transition: background 0.3s;
 
   &:hover {
     background: rgb(0, 68, 255);

@@ -3,7 +3,7 @@
     <div class="modal-container">
       <div
         class="modal-header"
-        :style="{ background: imageBG }"
+        :style="{ backgroundImage: imageBG }"
         style="backgroundrepeat: no-repeat"
       >
         <button type="button" class="close-button" ref="closeButton">X</button>
@@ -56,8 +56,8 @@ export default {
   background: rgba(0, 0, 0, 0.753);
 
   .close-button {
-    font-size: 3rem;
-    color: white;
+    font-size: 2rem;
+    color: rgb(49, 49, 49);
     background: transparent;
     position: absolute;
     top: 0;
