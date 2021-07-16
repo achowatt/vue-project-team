@@ -1,5 +1,19 @@
 <template>
-  <img :src="imageUrl" :alt="fullName" />
+  <!-- <img :src="imageUrl" :alt="fullName" /> -->
+  <button
+    v-if="chosen"
+    class="remove team-buttons"
+    @click="deleteMember()"
+    type="button"
+  >
+    <span class="overlay" />
+    <img :src="imageUrl" :alt="fullName" />
+  </button>
+  <button v-else class="add team-buttons" @click="addMember()" type="button">
+    <span class="overlay" />
+    <img :src="imageUrl" :alt="fullName" class="add-team" />
+  </button>
+
   <p class="name">{{ fullName }}</p>
   <p class="job-title">{{ jobTitle }}</p>
   <div class="button-container">
@@ -8,17 +22,6 @@
     </router-link> -->
     <button type="button" class="read-bio" @click="openBio()">
       Bio & Details
-    </button>
-    <button
-      v-if="chosen"
-      class="delete-team"
-      @click="deleteMember()"
-      type="button"
-    >
-      Remove
-    </button>
-    <button v-else class="add-team" @click="addMember()" type="button">
-      Add to Team
     </button>
   </div>
 </template>
@@ -54,10 +57,57 @@ img {
   width: 100%;
   height: auto;
 }
-button {
-  width: 50%;
-  background: #eeeeee;
-  border: solid 2px #eeeeee;
+
+.team-buttons {
+  width: 100%;
+  background: grey;
+  border: none;
+  padding: 0;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    font-size: 2.5em;
+    font-weight: bold;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.664);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  @media (hover: hover) {
+    &:hover::after {
+      opacity: 1;
+    }
+    &:hover.remove::after {
+      content: "Remove";
+    }
+    &:hover.add::after {
+      content: "Add to Team";
+    }
+
+    &:active::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+    }
+  }
+  &.remove {
+    background: rgb(0, 68, 255); //blue indicator for chosen
+  }
+  &.add {
+    background: black; //indicator for not chosen
+  }
 }
 
 .name {
@@ -66,6 +116,7 @@ button {
 
 .read-bio {
   background: white;
-  border: solid 2px #eeeeee;
+  font-style: italic;
+  line-height: 0.7;
 }
 </style>

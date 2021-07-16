@@ -133,26 +133,6 @@ span {
   color: #ede6de;
 }
 
-label {
-  font-size: 1.5rem;
-  color: #b4b3b3;
-  font-weight: bold;
-  font-family: "Bebas Neue", cursive;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  @media screen and (max-width: 740px) {
-    font-size: 1.7rem;
-  }
-}
-
-input {
-  border: none;
-  font-size: 2rem;
-  color: rgb(68, 68, 68);
-  border-bottom: solid 1px rgb(228, 228, 228);
-  height: 4rem;
-}
-
 #step-3 {
   padding-bottom: 4rem;
   border-bottom: solid 1px rgb(228, 228, 228);
@@ -168,6 +148,30 @@ input {
   display: flex;
   flex-direction: column;
   margin-bottom: 4rem;
+
+  label {
+    font-size: 1.5rem;
+    color: #b4b3b3;
+    font-weight: bold;
+    font-family: "Bebas Neue", cursive;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    @media screen and (max-width: 740px) {
+      font-size: 1.7rem;
+    }
+  }
+
+  input {
+    border: none;
+    font-size: 2rem;
+    color: rgb(68, 68, 68);
+    border-bottom: solid 1px rgb(228, 228, 228);
+    height: 4rem;
+  }
+
+  input:focus + label {
+    color: green;
+  }
 }
 
 .team-images {
@@ -203,6 +207,7 @@ input {
   padding-left: 1rem;
   list-style: none;
   padding: 0;
+  margin-top: 1rem;
   li {
     margin-right: 2rem;
     margin-bottom: 1rem;

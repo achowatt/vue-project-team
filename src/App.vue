@@ -42,6 +42,7 @@ button {
   position: fixed;
   top: 3rem;
   right: 2.5rem;
+  z-index: 7;
 }
 
 h1 {

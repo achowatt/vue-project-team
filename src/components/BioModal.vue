@@ -47,6 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 .overlay-modal {
+  z-index: 10;
   position: fixed;
   width: 100%;
   height: 100vh;
