@@ -1,5 +1,4 @@
 <template>
-  <!-- <img :src="imageUrl" :alt="fullName" /> -->
   <button
     v-if="chosen"
     class="remove team-buttons"
@@ -17,9 +16,6 @@
   <p class="name">{{ fullName }}</p>
   <p class="job-title">{{ jobTitle }}</p>
   <div class="button-container">
-    <!-- <router-link :to="`/bio/${id}`">
-      <button type="button" class="read-bio">Bio & Details</button>
-    </router-link> -->
     <button type="button" class="read-bio" @click="openBio()">
       Bio & Details
     </button>

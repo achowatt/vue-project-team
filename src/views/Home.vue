@@ -2,20 +2,15 @@
   <main class="container">
     <AddProjectSection />
   </main>
-  <!-- <SigniflyEmployeeSection /> -->
 </template>
 
 <script>
-// import SigniflyEmployeeSection from "@/components/SigniflyEmployeeSection.vue";
 import AddProjectSection from "@/components/AddProjectSection.vue";
 
 export default {
   name: "Home",
   components: {
-    // SigniflyEmployeeSection,
     AddProjectSection,
-
-    // ProjectList,
   },
 };
 </script>
