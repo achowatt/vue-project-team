@@ -3,9 +3,12 @@
   <p class="name">{{ fullName }}</p>
   <p class="job-title">{{ jobTitle }}</p>
   <div class="button-container">
-    <router-link :to="`/bio/${id}`">
+    <!-- <router-link :to="`/bio/${id}`">
       <button type="button" class="read-bio">Bio & Details</button>
-    </router-link>
+    </router-link> -->
+    <button type="button" class="read-bio" @click="openBio()">
+      Bio & Details
+    </button>
     <button
       v-if="chosen"
       class="delete-team"
@@ -24,7 +27,7 @@
 export default {
   name: "UserList",
   props: ["fullName", "jobTitle", "id", "imageUrl", "index"],
-  emits: ["add", "remove"],
+  emits: ["add", "remove", "openBio"],
   data() {
     return {
       chosen: false,
@@ -38,6 +41,9 @@ export default {
     deleteMember() {
       this.$emit("remove", this.id);
       this.chosen = false;
+    },
+    openBio() {
+      this.$emit("openBio", this.id);
     },
   },
 };

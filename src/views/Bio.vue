@@ -37,7 +37,6 @@ export default {
 
     onMounted(async () => {
       const data = await getUser(userId.value);
-      console.log(data);
       user.fullName = data.fullName;
       user.jobTitle = data.jobTitle;
       user.bio = data.bio;

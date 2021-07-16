@@ -1,4 +1,5 @@
 <template>
+  <BioModal v-if="modal.opened" :info="modal.info" @closeBio="closeBio" />
   <section class="create-project-section">
     <h1>Build Your team <span class="highlight-1">in 3 simple steps</span></h1>
     <form @submit.prevent="onSubmit">
@@ -39,6 +40,7 @@
               :index="index"
               @add="add"
               @remove="remove"
+              @openBio="openBio"
             />
           </div>
         </div>
@@ -73,15 +75,18 @@
 
 <script>
 import UserList from "./UserList.vue";
+import BioModal from "./BioModal.vue";
 import { createProject, fetchUsers } from "@/firebase.js";
+
 export default {
-  components: { UserList },
+  components: { UserList, BioModal },
   data() {
     return {
       title: "",
       description: "",
       chosenMembers: [],
       users: [],
+      modal: { opened: false, info: {} },
     };
   },
   methods: {
@@ -101,6 +106,13 @@ export default {
     },
     remove(id) {
       this.chosenMembers = this.chosenMembers.filter((user) => user.id !== id);
+    },
+    openBio(id) {
+      this.modal.info = this.users.filter((user) => user.id == id)[0];
+      this.modal.opened = true;
+    },
+    closeBio() {
+      this.modal.opened = false;
     },
   },
   created() {
